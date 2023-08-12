@@ -43,6 +43,32 @@ complexType& complexType::operator+=(const complexType& obj) {
 
 complexType complexType::operator+(const complexType& obj) const {
     complexType temp;
+    cout << "(" << realPart;
+    if (imaginaryPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << imaginaryPart << "i) + ";
+    cout << "(" << obj.realPart;
+    if (obj.imaginaryPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << obj.imaginaryPart << "i) " << endl;
+
+    cout << "(" << realPart;
+    if (obj.realPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << obj.realPart << ") + ";
+    cout << "(" << imaginaryPart << "i";
+    if (obj.imaginaryPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << obj.imaginaryPart << "i) " << endl;
+
     temp.realPart = realPart + obj.realPart;
     temp.imaginaryPart = imaginaryPart + obj.imaginaryPart;
 
@@ -61,28 +87,33 @@ complexType complexType::operator-(const complexType& obj) const {
     cout << "(" << temp.realPart << " - (" << objTemp.realPart << ") +";
     cout << "(" << temp.imaginaryPart << " - (" << objTemp.imaginaryPart << ")i " << endl;
 
-    temp.imaginaryPart = temp.imaginaryPart - temp.imaginaryPart - temp.imaginaryPart;
-    if (temp.realPart > 0)
+    /// Invert the value
+    objTemp.realPart = objTemp.realPart - objTemp.realPart - objTemp.realPart;
+    if (objTemp.realPart >= 0)
         cout << "(" << temp.realPart << " + " << objTemp.realPart << ") +";
     else
         cout << "(" << temp.realPart << " " << objTemp.realPart << ") +";;
     objTemp.imaginaryPart = objTemp.imaginaryPart - objTemp.imaginaryPart - objTemp.imaginaryPart;
 
-    if (temp.imaginaryPart >= 0)
+    if (objTemp.imaginaryPart >= 0)
         cout << "(" << temp.imaginaryPart << " + " << objTemp.imaginaryPart << ")i " << endl;
     else
         cout << "(" << temp.imaginaryPart << " " << objTemp.imaginaryPart << ")i " << endl;
     temp.realPart += objTemp.realPart;
     temp.imaginaryPart += objTemp.imaginaryPart;
-    cout << temp.realPart << " + ";
-    cout << temp.imaginaryPart << "i" << endl;
+    cout << "(" << temp.realPart;
+    if (temp.imaginaryPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << temp.imaginaryPart << "i)" << endl;
 
     return temp;
 }
 
-complexType complexType::operator*(void) const {
+//complexType complexType::operator*(void) const {
 
-}
+//}
 
 complexType complexType::operator/(const complexType& obj) const {
     /// Temp works likes the conjugate of complexType obj
@@ -100,7 +131,8 @@ complexType complexType::operator/(const complexType& obj) const {
     objBaseTemp.realPart = obj.realPart;
     objBaseTemp.imaginaryPart = obj.imaginaryPart;
 
-    ~temp;
+    // Get the conjugated value of temp
+    temp = ~temp;
     cout << setw(7) << "(" << baseTemp.realPart << ", " << baseTemp.imaginaryPart << "i) " << setw(3)
                         << "(" << temp.realPart << ", " << temp.imaginaryPart << "i) "<< endl;
     cout << setw(4) << setfill('-') << setw(17) << " X " << setw(17) << " " << setfill(' ') << endl;
@@ -123,29 +155,91 @@ complexType complexType::operator/(const complexType& obj) const {
     objBaseTemp.imaginaryPart *= temp.realPart;
     objImagP2 = obj.imaginaryPart * temp.imaginaryPart;
 
-    cout << setw(7) << baseTemp.realPart << " + " << realPart2 << "i + " << baseTemp.imaginaryPart << "i + " << imagPart2 << "(-1) " << endl;
+    cout << setw(7) << baseTemp.realPart;
+    if (realPart2 < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << realPart2 << "i";
+    if (baseTemp.imaginaryPart > 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << baseTemp.imaginaryPart << "i";
+    if (imagPart2 < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << imagPart2 << "(-1) " << endl;
     cout << setfill('-') << setw(17) << " X " << setw(17) << " " << setfill(' ') << endl;
-    cout << setw(7) << objBaseTemp.realPart << " + " << objRealP2 << "i + " << objBaseTemp.imaginaryPart << "i + " << objImagP2 << "(-1) " << endl;
+    cout << setw(7) << objBaseTemp.realPart;
+    if (objRealP2 < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << objRealP2 << "i";
+    if (objBaseTemp.imaginaryPart > 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << objBaseTemp.imaginaryPart << "i";
+    if (objImagP2 < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << objImagP2 << "(-1) " << endl;
 
     baseTemp.imaginaryPart = realPart2 + baseTemp.imaginaryPart;
+    /// Invert the value
     imagPart2 = imagPart2 - imagPart2 - imagPart2;
 
 
     objBaseTemp.imaginaryPart = objBaseTemp.imaginaryPart + objRealP2;
+    /// invert the value
     objImagP2 = objImagP2 - objImagP2 - objImagP2;
 
 
     cout << endl;
-    cout << setw(7) << baseTemp.realPart << " + " << baseTemp.imaginaryPart << "i + " << imagPart2 << endl;
+    cout << setw(7) << baseTemp.realPart;
+    if (baseTemp.imaginaryPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << baseTemp.imaginaryPart << "i";
+    if (imagPart2 < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << imagPart2 << endl;
     cout << setfill('-') << setw(17) << " X " << setw(17) << " " << setfill(' ') << endl;
-    cout << setw(7) << objBaseTemp.realPart << " + " << objBaseTemp.imaginaryPart << "i + " << objImagP2 << endl;
+    cout << setw(7) << objBaseTemp.realPart;
+    if (objBaseTemp.imaginaryPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << objBaseTemp.imaginaryPart << "i";
+    if(objImagP2 < 0)
+        cout << " ";
+    else
+        cout <<" + ";
+    cout << objImagP2 << endl;
 
     baseTemp.realPart = baseTemp.realPart + imagPart2;
     objBaseTemp.realPart = objBaseTemp.realPart + objImagP2;
     cout << endl;
-    cout << setw(7) << baseTemp.realPart << " + " << baseTemp.imaginaryPart << "i " << endl;
+    cout << setw(7) << baseTemp.realPart;
+    if (baseTemp.imaginaryPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << baseTemp.imaginaryPart << "i " << endl;
     cout << setfill('-') << setw(20) << " " << setfill(' ') << endl;
-    cout << setw(7) << objBaseTemp.realPart << " + " << objBaseTemp.imaginaryPart << "i " << endl;
+    cout << setw(9) << objBaseTemp.realPart;
+    //if (objBaseTemp.imaginaryPart < 0)
+    //    cout << " ";
+    //else
+    //    cout << " + ";
+    //cout << objBaseTemp.imaginaryPart << "i " << endl;
 
     cout << endl;
     cout << setfill('*') << setw(10) << "Final result: " << setw(10) << setfill(' ') << endl;
@@ -153,8 +247,12 @@ complexType complexType::operator/(const complexType& obj) const {
     cout << setw(6) << " " << setfill('-') << setw(6) << " " << setfill(' ') << setw(1) << " " << setfill('-') << setw(6) << " " << setfill(' ') << endl;
     cout << setw(10) << objBaseTemp.realPart << setw(7) << objBaseTemp.realPart << endl;
 
-    cout << endl << "The result of the fraction is:  " << baseTemp.realPart / objBaseTemp.realPart
-                    << " + " << baseTemp.imaginaryPart / objBaseTemp.realPart << "i " << endl;
+    cout << endl << "The result of the fraction is:  " << baseTemp.realPart / objBaseTemp.realPart;
+    if(baseTemp.imaginaryPart / objBaseTemp.realPart < 0)
+        cout << " ";
+    else
+        cout << " + ";
+    cout << baseTemp.imaginaryPart / objBaseTemp.realPart << "i " << endl;
     return baseTemp;
 }
 
@@ -187,9 +285,12 @@ double operator!(complexType& obj) {
 //    return *this;
 //}
 
-complexType& operator~(complexType& obj) {
-    obj.imaginaryPart = obj.imaginaryPart - obj.imaginaryPart - obj.imaginaryPart;
-    return obj;
+complexType operator~(complexType& obj) {
+    /// Invert the value
+    complexType temp;
+    temp = obj;
+    temp.imaginaryPart = temp.imaginaryPart - temp.imaginaryPart - temp.imaginaryPart;
+    return temp;
 }
 
 bool complexType::operator==(const complexType& obj) const {
