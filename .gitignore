@@ -1,9 +1,9 @@
 #Code blocks main project file
-.cbd
+*.cbp
 
 #code blocks dependence file
-.depend
+*.depend
 
 #code blocks layout file
-.layout
+*.layout
 
