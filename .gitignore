@@ -1,0 +1,9 @@
+#Code blocks main project file
+.cbd
+
+#code blocks dependence file
+.depend
+
+#code blocks layout file
+.layout
+
